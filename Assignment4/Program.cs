@@ -25,7 +25,7 @@ namespace Assignment4
             }
         }
 
-        static IConfiguration LoadConfiguration()
+        public static IConfiguration LoadConfiguration()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())

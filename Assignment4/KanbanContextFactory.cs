@@ -10,9 +10,29 @@ namespace Assignment4
 {
     public class KanbanContextFactory : IDesignTimeDbContextFactory<KanbanContext>
     {
-        public KanbanContext CreateDbContext(string[] args)
+        KanbanContext IDesignTimeDbContextFactory<KanbanContext>.CreateDbContext(string[] args)
         {
-            throw new NotImplementedException();
+            var configuration = Program.LoadConfiguration();
+
+            var connectionString = configuration.GetConnectionString("KanbanBoard");
+
+            var optionsBuilder = new DbContextOptionsBuilder<KanbanContext>().UseSqlServer(connectionString);
+
+            return new KanbanContext(optionsBuilder.Options);
+        }
+
+        //method for populating database
+        public static void Seed(KanbanContext context)
+        {
+            /* context.Database.ExecuteSqlRaw("DELETE dbo.Tasks");
+            context.Database.ExecuteSqlRaw("DELETE dbo.Users");
+            context.Database.ExecuteSqlRaw("DELETE dbo.Task");
+            context.Database.ExecuteSqlRaw("DELETE dbo.TaskTag");
+            context.Database.ExecuteSqlRaw("DBCC CHECKIDENT ('dbo.Tasks', RESEED, 0)");
+            context.Database.ExecuteSqlRaw("DBCC CHECKIDENT ('dbo.Users', RESEED, 0)");
+            context.Database.ExecuteSqlRaw("DBCC CHECKIDENT ('dbo.Task', RESEED, 0)");
+
+            context.SaveChanges(); */
         }
     }
 }
