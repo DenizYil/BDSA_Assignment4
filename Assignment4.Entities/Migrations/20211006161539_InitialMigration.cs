@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Assignment4.Entities.Migrations
 {
@@ -7,48 +8,48 @@ namespace Assignment4.Entities.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Tag",
+                name: "Tags",
                 columns: table => new
                 {
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    ID = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tag", x => x.Name);
+                    table.PrimaryKey("PK_Tags", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    ID = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    ID = table.Column<int>(type: "integer", nullable: false),
+                    Title = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Email);
+                    table.PrimaryKey("PK_Users", x => x.Email);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Task",
+                name: "Tasks",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AssignedToEmail = table.Column<string>(type: "nvarchar(100)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    State = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    AssignedToEmail = table.Column<string>(type: "character varying(100)", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    State = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Task", x => x.ID);
+                    table.PrimaryKey("PK_Tasks", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Task_User_AssignedToEmail",
+                        name: "FK_Tasks_Users_AssignedToEmail",
                         column: x => x.AssignedToEmail,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Email",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -57,22 +58,22 @@ namespace Assignment4.Entities.Migrations
                 name: "TagTask",
                 columns: table => new
                 {
-                    TagsName = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TasksID = table.Column<int>(type: "int", nullable: false)
+                    TagsName = table.Column<string>(type: "character varying(50)", nullable: false),
+                    TasksID = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TagTask", x => new { x.TagsName, x.TasksID });
                     table.ForeignKey(
-                        name: "FK_TagTask_Tag_TagsName",
+                        name: "FK_TagTask_Tags_TagsName",
                         column: x => x.TagsName,
-                        principalTable: "Tag",
+                        principalTable: "Tags",
                         principalColumn: "Name",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TagTask_Task_TasksID",
+                        name: "FK_TagTask_Tasks_TasksID",
                         column: x => x.TasksID,
-                        principalTable: "Task",
+                        principalTable: "Tasks",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -83,8 +84,8 @@ namespace Assignment4.Entities.Migrations
                 column: "TasksID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Task_AssignedToEmail",
-                table: "Task",
+                name: "IX_Tasks_AssignedToEmail",
+                table: "Tasks",
                 column: "AssignedToEmail");
         }
 
@@ -94,13 +95,13 @@ namespace Assignment4.Entities.Migrations
                 name: "TagTask");
 
             migrationBuilder.DropTable(
-                name: "Tag");
+                name: "Tags");
 
             migrationBuilder.DropTable(
-                name: "Task");
+                name: "Tasks");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Assignment4.Entities
 {
-    public class User
+    public class Developer
     {
         public int ID {get; set;}
 

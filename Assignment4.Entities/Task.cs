@@ -12,10 +12,11 @@ namespace Assignment4.Entities
         public int ID {get; set;}
 
         [Required]
+        [StringLength(100)]
         public string Title {get; set;}
 
-        [StringLength(int.MaxValue)]
-        public User AssignedTo {get; set;}
+        [StringLength(65535)]
+        public Developer AssignedTo {get; set;}
 
         public string Description {get; set;}
 

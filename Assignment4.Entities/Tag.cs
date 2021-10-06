@@ -8,6 +8,7 @@ namespace Assignment4.Entities
         public int ID {get; set;}
 
         [Required, Key]
+        [StringLength(50)]
         public string Name {get; set;}
         public ICollection<Task> Tasks {get; set;}
     }
