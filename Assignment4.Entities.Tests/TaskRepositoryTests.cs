@@ -1,7 +1,6 @@
 using System;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Xunit;
 
 namespace Assignment4.Entities.Tests
 {

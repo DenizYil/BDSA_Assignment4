@@ -1,11 +1,6 @@
-using System;
-using System.IO;
-using Npgsql;
+using Assignment4.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
-
-using Assignment4.Entities;
 
 namespace Assignment4
 {

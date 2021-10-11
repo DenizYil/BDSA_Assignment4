@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
@@ -25,7 +26,7 @@ namespace Assignment4
                     cmd.ExecuteNonQuery();
                 }
 
-                if(connection.State == System.Data.ConnectionState.Open) {
+                if(connection.State == ConnectionState.Open) {
                     Console.WriteLine("connected to database");
                 }
 

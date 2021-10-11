@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using Assignment4.Core;
 
 namespace Assignment4.Entities
@@ -109,12 +108,12 @@ namespace Assignment4.Entities
 
         public Response Update(TaskUpdateDTO task)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public Response Delete(int taskId)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Xunit;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Data.Sqlite;
 using Assignment4.Core;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using Xunit;
 
 namespace Assignment4.Entities.Tests
 {
