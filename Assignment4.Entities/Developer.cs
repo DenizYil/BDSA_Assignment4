@@ -9,7 +9,7 @@ namespace Assignment4.Entities
 {
     public class Developer
     {
-        public int ID {get; set;}
+        public int Id {get; set;}
 
         [Required]
         [StringLength(100)]

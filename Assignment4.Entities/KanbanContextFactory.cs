@@ -11,21 +11,24 @@ namespace Assignment4
 {
     public class KanbanContextFactory : IDesignTimeDbContextFactory<KanbanContext>
     {
-        KanbanContext IDesignTimeDbContextFactory<KanbanContext>.CreateDbContext(string[] args)
+        public KanbanContext CreateDbContext(string[] args)
         {
-            IConfiguration configuration = Program.LoadConfiguration();
 
-            var builder = new DbContextOptionsBuilder<KanbanContext>();
+            var connectionString = "Server=localhost;Database=Futurama;User Id=sa;Password=6d874d0d-33db-43fe-8af7-752c5562db3a";
 
-            var connectionString = configuration.GetConnectionString("KanbanBoard");
-
-            var optionsBuilder = new DbContextOptionsBuilder<KanbanContext>().UseNpgsql(connectionString);
+            var optionsBuilder = new DbContextOptionsBuilder<KanbanContext>()
+                .UseSqlServer(connectionString);
 
             return new KanbanContext(optionsBuilder.Options);
         }
 
-        //method for populating database
         public static void Seed(KanbanContext context)
+        {
+            
+        }
+
+        //method for populating database
+        /*public static void Seed(KanbanContext context)
         {
             context.Database.ExecuteSqlRaw("DELETE dbo.Tasks");
             context.Database.ExecuteSqlRaw("DELETE dbo.Users");
@@ -37,5 +40,6 @@ namespace Assignment4
 
             context.SaveChanges();
         }
+        */
     }
 }

@@ -21,6 +21,11 @@ namespace Assignment4.Entities
                 .Entity<Task>()
                 .Property(t => t.State)
                 .HasConversion(new EnumToStringConverter<State>());
+            
+            modelBuilder
+                .Entity<Tag>()
+                .HasIndex(tag => tag.Name)
+                .IsUnique();
         }
     }
 }

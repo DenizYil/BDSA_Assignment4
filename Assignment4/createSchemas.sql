@@ -1,36 +1,34 @@
-drop table if exists TagTask;
-drop table if exists tag;
-drop table if exists task;
-drop table if exists developer;
-create table developer(
-	id real,
-	Title varchar(100),
-	Email varchar(100),
-	--TaskID real,
-	primary key(id)
+DROP TABLE IF EXISTS TagTask;
+DROP TABLE IF EXISTS tag;
+DROP TABLE IF EXISTS task;
+DROP TABLE IF EXISTS developer;
+
+CREATE TABLE developer(
+	id SERIAL PRIMARY KEY,
+	title VARCHAR(100),
+	email VARCHAR(100)
 );
-create table tag(
-	id real,
-	Name varchar(50),
-	primary key(id)
+
+
+CREATE TABLE tag(
+	id SERIAL PRIMARY KEY,
+    name VARCHAR(50)
 );
-create table task(
-	id real,
-	Title varchar(100),
-	DeveloperID real,
-	Description varchar(65535),
-	state varchar(20),
-	--, TaskID real
-	primary key(id),
-	foreign key(DeveloperID) references developer(id)
+
+
+CREATE TABLE task(
+	id SERIAL PRIMARY KEY,
+	title VARCHAR (100),
+    developerId SERIAL REFERENCES developer(id),
+    description varchar(65535),
+    state VARCHAR(20)
 );
 
 --many to many reference task to tag
-create table TagTask(
-	tagID real,
-	taskID real,
-	foreign key(tagID) references tag(id),
-	foreign key(taskID) references task(id)
+
+CREATE TABLE TagTask(
+	tagId SERIAL REFERENCES tag(id), 
+	taskId SERIAL REFERENCES task(id)
 );
 
-select * from TagTask
+--select * from TagTask

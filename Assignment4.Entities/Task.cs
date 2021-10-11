@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,7 @@ namespace Assignment4.Entities
 {
     public class Task
     {
-        public int ID {get; set;}
+        public int Id {get; set;}
 
         [Required]
         [StringLength(100)]
@@ -24,7 +25,9 @@ namespace Assignment4.Entities
         public State State {get; set;}
 
         public ICollection<Tag> Tags {get; set;}
-
-
+        
+        public DateTime Created { get; init; }
+        
+        public DateTime StateUpdated { get; set; }
     }
 }
