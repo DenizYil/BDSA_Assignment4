@@ -3,15 +3,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Assignment4.Entities
 {
-    public class Developer
+    public class User
     {
         public int Id {get; set;}
 
         [Required]
         [StringLength(100)]
-        public string Title {get; set;}
+        public string Name {get; set;}
 
-        [Required, EmailAddress, Key]
+        [Required]
+        [Key]
+        [EmailAddress]
         [StringLength(100)]
         public string Email {get; set;}
 

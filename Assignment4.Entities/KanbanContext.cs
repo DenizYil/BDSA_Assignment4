@@ -6,7 +6,7 @@ namespace Assignment4.Entities
 {
     public class KanbanContext : DbContext
     {
-        public DbSet<Developer> Users {get; set;}
+        public DbSet<User> Users {get; set;}
         public DbSet<Task> Tasks {get; set;}
         public DbSet<Tag> Tags {get; set;}
 

@@ -42,6 +42,11 @@ namespace Assignment4.Entities
                 return Response.NotFound;
             }
 
+            if (tag.Tasks?.Count > 1 && !force)
+            {
+                return Response.Conflict;
+            }
+
             _context.Tags.Remove(tag);
             _context.SaveChanges();
 
