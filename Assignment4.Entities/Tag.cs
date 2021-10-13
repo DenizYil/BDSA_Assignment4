@@ -5,9 +5,9 @@ namespace Assignment4.Entities
 {
     public class Tag
     {
-        public int ID {get; set;}
+        public int Id {get; set;}
 
-        [Required, Key]
+        [Required]
         [StringLength(50)]
         public string Name {get; set;}
         public ICollection<Task> Tasks {get; set;}

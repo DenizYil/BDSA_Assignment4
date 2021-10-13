@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Assignment4.Entities.Migrations
 {
@@ -11,8 +10,8 @@ namespace Assignment4.Entities.Migrations
                 name: "Tags",
                 columns: table => new
                 {
-                    Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    ID = table.Column<int>(type: "integer", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -23,9 +22,9 @@ namespace Assignment4.Entities.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    ID = table.Column<int>(type: "integer", nullable: false),
-                    Title = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,12 +35,12 @@ namespace Assignment4.Entities.Migrations
                 name: "Tasks",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Title = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    AssignedToEmail = table.Column<string>(type: "character varying(100)", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    State = table.Column<string>(type: "text", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    AssignedToEmail = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,8 +57,8 @@ namespace Assignment4.Entities.Migrations
                 name: "TagTask",
                 columns: table => new
                 {
-                    TagsName = table.Column<string>(type: "character varying(50)", nullable: false),
-                    TasksID = table.Column<int>(type: "integer", nullable: false)
+                    TagsName = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    TasksID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -77,6 +76,12 @@ namespace Assignment4.Entities.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tags_Name",
+                table: "Tags",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TagTask_TasksID",
