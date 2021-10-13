@@ -144,7 +144,7 @@ namespace Assignment4.Entities
                 task.AssignedTo = null;
             }
 
-            if (update.Tags != null && update.Tags.Count != 0)
+            if (update.Tags != null)
             {
                 var tags =
                     from name in update.Tags
